@@ -1,9 +1,11 @@
 package main
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"log"
+	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -60,7 +62,10 @@ func dbConnection() {
 	fmt.Println("Erfolgreich mit MariaDB verbunden!")
 
 	rows, err := db.Query("select id from test order by 1 desc")
-	db.QueryContext()
+
+	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second) // Timeout nach 5 Sek.
+	i := 466
+	rows, err = db.QueryContext(ctx, "SELECT id from test where ID = ?", i)
 	// type person struct {
 	// 	vorname        string
 	// 	nachname       string
@@ -84,6 +89,5 @@ func dbConnection() {
 			continue // Überspringe diese Zeile bei Fehler
 		}
 	}
-	fmt.Println(text)
 	fmt.Println(text)
 }
