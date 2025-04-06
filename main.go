@@ -45,7 +45,7 @@ func Schiffe() {
 }
 
 func dbConnection() {
-	dsn := "extern:marco@tcp(192.168.188.193:3306)/privat?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "extern:marco@tcp(noteserv:3306)/privat?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {
 		// Loggt den Fehler und beendet das Programm, wenn die DSN-Syntax ungültig ist etc.
@@ -60,6 +60,7 @@ func dbConnection() {
 	fmt.Println("Erfolgreich mit MariaDB verbunden!")
 
 	rows, err := db.Query("select id from test order by 1 desc")
+	db.QueryContext()
 	// type person struct {
 	// 	vorname        string
 	// 	nachname       string
