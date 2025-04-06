@@ -61,11 +61,15 @@ func dbConnection() {
 	}
 	fmt.Println("Erfolgreich mit MariaDB verbunden!")
 
+	i := 666
+	query := "INSERT INTO test (id) VALUES (?)"
+	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second) // Timeout nach 5 Sek.
+	db.ExecContext(ctx, query, i)
+
 	rows, err := db.Query("select id from test order by 1 desc")
 
-	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second) // Timeout nach 5 Sek.
-	i := 466
-	rows, err = db.QueryContext(ctx, "SELECT id from test where ID = ?", i)
+	i = 400
+	rows, err = db.QueryContext(ctx, "SELECT id from test where ID > ?", i)
 	// type person struct {
 	// 	vorname        string
 	// 	nachname       string
