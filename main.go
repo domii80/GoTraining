@@ -84,4 +84,5 @@ func dbConnection() {
 		}
 	}
 	fmt.Println(text)
+	fmt.Println(text)
 }
