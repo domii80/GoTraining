@@ -11,6 +11,8 @@ type Ship struct {
 }
 
 func NewShip(length int, startPos coord, orientation int) Ship {
+	text := "Ahoi"
+	fmt.Printf("Text: %v\n", text)
 	return Ship{length: length, startPos: startPos, orientation: orientation}
 }
 
